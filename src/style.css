@@ -7,6 +7,7 @@
   --line: rgba(233, 236, 241, 0.1);
   --shadow: rgba(0, 0, 0, 0.35);
   --accent: #ffffff;
+  --header-h: 100px;
 }
 
 * {
@@ -41,16 +42,18 @@ a {
   padding: 12px 4px 0;
 }
 
-.title {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+.brand {
+  height: var(--header-h);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.subtitle {
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
+.brand-logo {
+  height: var(--header-h);
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .tabs {
@@ -400,17 +403,15 @@ footer {
 }
 
 @media (min-width: 900px) {
+  :root {
+    --header-h: 200px;
+  }
+
   .page {
     max-width: 980px;
     margin: 0 auto;
     padding: 32px 24px 60px;
   }
 
-  .title {
-    font-size: 36px;
-  }
-
-  .subtitle {
-    font-size: 16px;
-  }
+ 
 }

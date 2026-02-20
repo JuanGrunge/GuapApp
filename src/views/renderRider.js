@@ -68,6 +68,7 @@ export function renderRider(container, content) {
     <section class="card">
       <h2>Stage Plot</h2>
       <div class="stage-plot">
+        <button class="stage-plot-open" type="button" aria-label="Ampliar stage plot">Ampliar</button>
         ${StagePlotSvg()}
       </div>
     </section>

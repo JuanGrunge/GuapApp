@@ -35,10 +35,22 @@ function renderContactItems(items) {
 }
 
 export function renderDossier(container, content) {
+  const summary = content.dossier.description.slice(0, 2);
+  const remaining = content.dossier.description.slice(2);
+
   container.innerHTML = `
     <section class="card">
       <h2>Dossier</h2>
-      ${renderParagraphs(content.dossier.description)}
+      ${renderParagraphs(summary)}
+      <ul class="highlights">
+        <li>Homenaje delicado a un repertorio que cruza generaciones.</li>
+        <li>Voces y ejecución que evocan el sonido original.</li>
+        <li>Experiencia sensorial cuidada en escena.</li>
+      </ul>
+      <button class="btn btn-ghost" id="dossier-toggle" aria-expanded="false" aria-controls="dossier-more">Leer más</button>
+      <div id="dossier-more" class="collapse" hidden>
+        ${renderParagraphs(remaining)}
+      </div>
     </section>
 
     <section class="card">

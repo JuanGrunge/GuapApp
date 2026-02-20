@@ -3,14 +3,16 @@ import { content } from "./content/content";
 import { renderDossier } from "./views/renderDossier";
 import { renderRider } from "./views/renderRider";
 import Lenis from "lenis";
+import logoGuapa from "./assets/logo-guapa.png";
 
 const app = document.querySelector("#app");
 
 app.innerHTML = `
   <div class="page">
     <header class="header">
-      <div class="title">${content.band.name}</div>
-      <div class="subtitle">${content.band.subtitle || "Tributo"}</div>
+      <div class="brand" role="banner">
+        <img class="brand-logo" src="${logoGuapa}" alt="GUAPA — Tributo LODVG" />
+      </div>
     </header>
 
     <nav class="tabs" role="tablist" aria-label="Secciones">

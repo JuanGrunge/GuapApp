@@ -161,7 +161,18 @@ view.addEventListener("click", (event) => {
 
   const stagePlot = event.target.closest(".stage-plot");
   if (stagePlot) {
-    const svg = stagePlot.querySelector("svg");
+    const img = stagePlot.querySelector("img.stageplot-img");
+    if (img) {
+      modalBody.innerHTML = `
+        <img class="modal-stageplot-img" src="${img.src}" alt="${img.alt || "Stage plot"}" />
+      `;
+      modalBackdrop.classList.add("is-open");
+      document.body.classList.add("modal-open");
+      pauseLenis();
+      return;
+    }
+
+    const svg = stagePlot.querySelector('svg[aria-label="Stage plot GUAPA"]');
     openModalWithSvg(svg);
   }
 });

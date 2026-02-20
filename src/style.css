@@ -212,7 +212,7 @@ table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  min-width: 720px;
+  min-width: 560px;
 }
 
 th,
@@ -248,18 +248,37 @@ th {
   cursor: pointer;
 }
 
+.stageplot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
 .stage-plot-open {
   position: absolute;
   right: 12px;
   top: 12px;
-  border: 1px solid var(--line);
-  background: rgba(15, 18, 27, 0.9);
-  color: var(--text);
-  font-size: 12px;
-  padding: 6px 10px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 999px;
+  color: var(--text);
+  background: rgba(15, 18, 27, 0.9);
+  border: 1px solid var(--line);
   z-index: 2;
   transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+}
+
+.icon-expand {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  display: block;
 }
 
 footer {
@@ -331,6 +350,15 @@ footer {
   height: auto;
   max-width: 95vw;
   max-height: 80vh;
+}
+
+.modal-body img.modal-stageplot-img {
+  width: 100%;
+  height: auto;
+  max-width: 95vw;
+  max-height: 80vh;
+  object-fit: contain;
+  display: block;
 }
 
 .modal-close {

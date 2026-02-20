@@ -127,6 +127,39 @@ export const content = {
         { source: "Playback L", type: "Line", model: "—", phantom: "—", stand: "—", notes: "Estéreo L/R" },
         { source: "Playback R", type: "Line", model: "—", phantom: "—", stand: "—", notes: "Estéreo L/R" }
       ]
+    },
+    micRequiredBySource: {
+      "Kick": "Mic dinámico (bombo)",
+      "Snare": "Mic dinámico",
+      "Hi-hat": "Mic condensador (lápiz)",
+      "Tom 1": "Mic dinámico (pinza)",
+      "Tom 2": "Mic dinámico (pinza)",
+      "Floor Tom": "Mic dinámico (pinza)",
+      "Overhead L": "Mic condensador (overhead)",
+      "Overhead R": "Mic condensador (overhead)",
+      "Voz baterista": "Mic dinámico + pedestal"
+    },
+    monitoringBySource: {
+      "Voz baterista": "In-ear (cableado)",
+      "Bajo": "In-ear (cableado) + monitor piso (requerido)",
+      "Teclados L": "In-ear (cableado) + monitor piso (requerido)",
+      "Teclados R": "In-ear (cableado) + monitor piso (requerido)",
+      "Guitarra": "In-ear (cableado)",
+      "Voz principal": "In-ear inalámbrico + monitor piso (requerido)",
+      "Kick": "—",
+      "Snare": "—",
+      "Hi-hat": "—",
+      "Tom 1": "—",
+      "Tom 2": "—",
+      "Floor Tom": "—",
+      "Overhead L": "—",
+      "Overhead R": "—",
+      "Drum kit L": "—",
+      "Drum kit R": "—",
+      "Playback L": "—",
+      "Playback R": "—",
+      "Guitarra L": "In-ear (cableado)",
+      "Guitarra R": "In-ear (cableado)"
     }
   }
 };

@@ -133,10 +133,10 @@ function renderRoute() {
   }
 
   if (!prefersReducedMotion && revealObserver) {
-    const cards = Array.from(view.querySelectorAll(".card"));
-    cards.forEach((card) => {
-      card.classList.add("reveal");
-      revealObserver.observe(card);
+    const revealTargets = Array.from(view.querySelectorAll(".hero, .card"));
+    revealTargets.forEach((el) => {
+      el.classList.add("reveal");
+      revealObserver.observe(el);
     });
   }
 }
@@ -178,6 +178,15 @@ view.addEventListener("click", (event) => {
     openModalWithSvg(svg);
   }
 });
+
+view.addEventListener("load", (event) => {
+  if (prefersReducedMotion) return;
+  const img = event.target;
+  if (!(img instanceof HTMLImageElement)) return;
+  if (!img.classList.contains("hero-img")) return;
+  const hero = img.closest(".hero");
+  if (hero) hero.classList.add("is-visible");
+}, true);
 
 window.addEventListener("hashchange", renderRoute);
 renderRoute();

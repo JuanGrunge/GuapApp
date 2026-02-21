@@ -42,7 +42,7 @@ export function renderDossier(container, content) {
 
   container.innerHTML = `
     <section class="hero" aria-label="Portada dossier GUAPA">
-      <img class="hero-img" src="${heroGuapa}" alt="Portada: La Oreja de Van Gogh — GUAPA" loading="eager" draggable="false" />
+      <img class="hero-img" src="${heroGuapa}" alt="Portada: La Oreja de Van Gogh — GUAPA" loading="eager" fetchpriority="high" decoding="async" draggable="false" />
     </section>
 
     <section class="card">

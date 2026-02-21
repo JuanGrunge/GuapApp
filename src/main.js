@@ -123,6 +123,8 @@ function setActiveTab(hash) {
 function renderRoute() {
   const hash = normalizeHash(window.location.hash);
   setActiveTab(hash);
+  view.classList.toggle("view--dossier", hash !== "#/rider");
+  view.classList.toggle("view--rider", hash === "#/rider");
 
   if (hash === "#/rider") {
     renderRider(view, content);

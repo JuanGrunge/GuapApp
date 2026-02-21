@@ -1,3 +1,5 @@
+import heroGuapa from "../assets/hero-guapa.png";
+
 function renderParagraphs(paragraphs) {
   return paragraphs.map((p) => `<p>${p}</p>`).join("");
 }
@@ -39,6 +41,10 @@ export function renderDossier(container, content) {
   const remaining = content.dossier.description.slice(2);
 
   container.innerHTML = `
+    <section class="hero" aria-label="Portada dossier GUAPA">
+      <img class="hero-img" src="${heroGuapa}" alt="Portada: La Oreja de Van Gogh — GUAPA" loading="eager" draggable="false" />
+    </section>
+
     <section class="card">
       <h2>Dossier</h2>
       ${renderParagraphs(summary)}

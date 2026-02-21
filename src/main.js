@@ -25,9 +25,11 @@ app.innerHTML = `
 `;
 
 const view = document.querySelector("#view");
+const page = document.querySelector(".page");
 const tabs = Array.from(document.querySelectorAll(".tab"));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let lenis = null;
+let slideshowTimer = null;
 
 if (!prefersReducedMotion) {
   lenis = new Lenis({
@@ -50,6 +52,42 @@ function pauseLenis() {
 
 function resumeLenis() {
   if (lenis) lenis.start();
+}
+
+function stopSlideshow() {
+  if (slideshowTimer) {
+    clearInterval(slideshowTimer);
+    slideshowTimer = null;
+  }
+}
+
+function initSlideshow() {
+  stopSlideshow();
+  if (prefersReducedMotion) return;
+  const el = view.querySelector("[data-slideshow]");
+  if (!el) return;
+  const slides = Array.from(el.querySelectorAll(".slide"));
+  const captionEl = el.querySelector("[data-caption]");
+  if (slides.length < 2) return;
+  slides.forEach((slide, idx) => slide.classList.toggle("is-active", idx === 0));
+  let index = 0;
+  if (captionEl) {
+    captionEl.textContent = slides[0].dataset.name || "";
+    captionEl.classList.add("is-visible");
+  }
+  slideshowTimer = setInterval(() => {
+    slides[index].classList.remove("is-active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("is-active");
+    if (captionEl) {
+      captionEl.classList.remove("is-visible");
+      const next = slides[index];
+      setTimeout(() => {
+        captionEl.textContent = next.dataset.name || "";
+        captionEl.classList.add("is-visible");
+      }, 160);
+    }
+  }, 4500);
 }
 
 const modalBackdrop = document.createElement("div");
@@ -125,15 +163,19 @@ function renderRoute() {
   setActiveTab(hash);
   view.classList.toggle("view--dossier", hash !== "#/rider");
   view.classList.toggle("view--rider", hash === "#/rider");
+  page.classList.toggle("page--dossier", hash !== "#/rider");
+  page.classList.toggle("page--rider", hash === "#/rider");
 
   if (hash === "#/rider") {
     renderRider(view, content);
+    stopSlideshow();
   } else {
     renderDossier(view, content);
+    initSlideshow();
   }
 
   if (!prefersReducedMotion && revealObserver) {
-    const revealTargets = Array.from(view.querySelectorAll(".hero, .card"));
+    const revealTargets = Array.from(view.querySelectorAll(".hero, .card, .story-block"));
     revealTargets.forEach((el) => {
       el.classList.add("reveal");
       revealObserver.observe(el);
@@ -149,18 +191,6 @@ tabs.forEach((btn) => {
 });
 
 view.addEventListener("click", (event) => {
-  const toggleBtn = event.target.closest("#dossier-toggle");
-  if (toggleBtn) {
-    const target = document.querySelector("#dossier-more");
-    const isOpen = toggleBtn.getAttribute("aria-expanded") === "true";
-    toggleBtn.setAttribute("aria-expanded", String(!isOpen));
-    toggleBtn.textContent = isOpen ? "Leer más" : "Ver menos";
-    if (target) {
-      target.hidden = isOpen;
-      target.classList.toggle("open", !isOpen);
-    }
-  }
-
   const stagePlot = event.target.closest(".stage-plot");
   if (stagePlot) {
     const img = stagePlot.querySelector("img.stageplot-img");

@@ -1,12 +1,23 @@
 :root {
-  --bg: #0b0c10;
-  --panel: #121520;
-  --panel2: #0f121b;
-  --text: #e9ecf1;
-  --muted: #a7b0be;
-  --line: rgba(233, 236, 241, 0.1);
-  --shadow: rgba(0, 0, 0, 0.35);
-  --accent: #ffffff;
+  --bg: #d9d0c6;
+  --surface: #f6f0e8;
+  --surface-2: #efe5da;
+  --text: #1f1b18;
+  --muted: #6a5f57;
+  --accent: #b08d57;
+  --link: #8b5a2b;
+  --border: rgba(0, 0, 0, 0.10);
+  --border-strong: rgba(0, 0, 0, 0.18);
+  --shadow: rgba(0, 0, 0, 0.08);
+  --overlay-strong: rgba(31, 27, 24, 0.78);
+  --overlay-mid: rgba(31, 27, 24, 0.55);
+  --overlay-soft: rgba(31, 27, 24, 0.32);
+  --overlay-fade: rgba(31, 27, 24, 0.15);
+  --dark-panel: #1f1b18;
+  --dark-border: rgba(255, 255, 255, 0.10);
+  --panel: var(--surface);
+  --panel2: var(--surface-2);
+  --line: var(--border);
   --header-h: 100px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
@@ -49,8 +60,10 @@ td,
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .page {
@@ -82,9 +95,9 @@ a {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(120% 90% at 50% 50%, rgba(0, 0, 0, 0) 55%, rgba(11, 12, 16, 0.45) 85%, rgba(11, 12, 16, 0.8) 100%),
-    linear-gradient(180deg, rgba(11, 12, 16, 0.7) 0%, rgba(11, 12, 16, 0) 30%, rgba(11, 12, 16, 0) 70%, rgba(11, 12, 16, 0.88) 100%),
-    linear-gradient(90deg, rgba(11, 12, 16, 0.78) 0%, rgba(11, 12, 16, 0) 18%, rgba(11, 12, 16, 0) 82%, rgba(11, 12, 16, 0.78) 100%);
+    radial-gradient(120% 90% at 50% 50%, rgba(0, 0, 0, 0) 55%, var(--overlay-mid) 85%, var(--overlay-strong) 100%),
+    linear-gradient(180deg, var(--overlay-strong) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, var(--overlay-strong) 100%),
+    linear-gradient(90deg, var(--overlay-strong) 0%, rgba(0, 0, 0, 0) 18%, rgba(0, 0, 0, 0) 82%, var(--overlay-strong) 100%);
 }
 
 .hero-img {
@@ -131,7 +144,7 @@ a {
 
 .tab.active {
   background: var(--accent);
-  color: #0b0c10;
+  color: var(--text);
 }
 
 .view {
@@ -254,9 +267,9 @@ a {
   z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(11, 12, 16, 0.92) 0%, rgba(11, 12, 16, 0.45) 18%, rgba(11, 12, 16, 0) 45%, rgba(11, 12, 16, 0) 70%, rgba(11, 12, 16, 0.45) 86%, rgba(11, 12, 16, 0.82) 100%),
-    linear-gradient(180deg, rgba(11, 12, 16, 0.55) 0%, rgba(11, 12, 16, 0) 28%, rgba(11, 12, 16, 0) 72%, rgba(11, 12, 16, 0.7) 100%),
-    radial-gradient(120% 90% at 55% 50%, rgba(0, 0, 0, 0) 52%, rgba(11, 12, 16, 0.45) 82%, rgba(11, 12, 16, 0.75) 100%);
+    linear-gradient(90deg, var(--overlay-strong) 0%, var(--overlay-mid) 18%, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0) 70%, var(--overlay-mid) 86%, var(--overlay-strong) 100%),
+    linear-gradient(180deg, var(--overlay-mid) 0%, rgba(0, 0, 0, 0) 28%, rgba(0, 0, 0, 0) 72%, var(--overlay-strong) 100%),
+    radial-gradient(120% 90% at 55% 50%, rgba(0, 0, 0, 0) 52%, var(--overlay-mid) 82%, var(--overlay-strong) 100%);
 }
 
 .story-media--slideshow {
@@ -342,7 +355,7 @@ a {
   width: min(560px, 42vw);
   z-index: 3;
   padding: 28px 32px;
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+  text-shadow: none;
 }
 
 .story-block--feature .story-text::before {
@@ -356,8 +369,8 @@ a {
   z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(11, 12, 16, 0) 0%, rgba(11, 12, 16, 0) 55%, rgba(11, 12, 16, 0.65) 78%, rgba(11, 12, 16, 0.92) 100%),
-    radial-gradient(120% 90% at 60% 50%, rgba(0, 0, 0, 0) 52%, rgba(11, 12, 16, 0.35) 82%, rgba(11, 12, 16, 0.65) 100%);
+    linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 55%, var(--overlay-mid) 78%, var(--overlay-strong) 100%),
+    radial-gradient(120% 90% at 60% 50%, rgba(0, 0, 0, 0) 52%, var(--overlay-soft) 82%, var(--overlay-mid) 100%);
 }
 
 .story-block--carousel-feature {
@@ -391,7 +404,7 @@ a {
   width: min(520px, 40vw);
   z-index: 3;
   padding: 28px 28px;
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+  text-shadow: none;
 }
 
 .story-block--carousel-feature .story-text::before {
@@ -405,9 +418,9 @@ a {
   z-index: 4;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(11, 12, 16, 0.88) 0%, rgba(11, 12, 16, 0.55) 14%, rgba(11, 12, 16, 0) 42%, rgba(11, 12, 16, 0) 100%),
-    linear-gradient(180deg, rgba(11, 12, 16, 0.35) 0%, rgba(11, 12, 16, 0) 28%, rgba(11, 12, 16, 0) 72%, rgba(11, 12, 16, 0.55) 100%),
-    radial-gradient(120% 90% at 45% 50%, rgba(0, 0, 0, 0) 55%, rgba(11, 12, 16, 0.28) 82%, rgba(11, 12, 16, 0.58) 100%);
+    linear-gradient(90deg, var(--overlay-strong) 0%, var(--overlay-mid) 14%, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0) 100%),
+    linear-gradient(180deg, var(--overlay-soft) 0%, rgba(0, 0, 0, 0) 28%, rgba(0, 0, 0, 0) 72%, var(--overlay-mid) 100%),
+    radial-gradient(120% 90% at 45% 50%, rgba(0, 0, 0, 0) 55%, var(--overlay-fade) 82%, var(--overlay-mid) 100%);
 }
 
 .slide-caption {
@@ -418,9 +431,9 @@ a {
   font-family: var(--font-display);
   letter-spacing: 0.06em;
   font-size: 22px;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(246, 240, 232, 0.95);
   text-transform: uppercase;
-  text-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 10px 26px var(--overlay-strong);
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 450ms ease, transform 450ms ease;
@@ -434,7 +447,7 @@ a {
 .media-placeholder {
   min-height: 260px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(246, 240, 232, 0.65);
   border: 0;
   display: flex;
   align-items: center;
@@ -556,7 +569,7 @@ a {
 
 .segmented button.active {
   background: var(--accent);
-  color: #0b0c10;
+  color: var(--text);
 }
 
 .table-wrap {
@@ -584,7 +597,7 @@ td {
 th {
   color: var(--muted);
   font-weight: 600;
-  background: rgba(15, 18, 27, 0.85);
+  background: rgba(239, 229, 218, 0.85);
   position: sticky;
   top: 0;
   backdrop-filter: blur(8px);
@@ -598,8 +611,8 @@ th {
 }
 
 .stage-plot {
-  background: var(--panel2);
-  border: 1px solid var(--line);
+  background: var(--dark-panel);
+  border: 1px solid var(--dark-border);
   border-radius: 16px;
   padding: 12px;
   position: relative;
@@ -626,7 +639,7 @@ th {
   justify-content: center;
   border-radius: 999px;
   color: var(--text);
-  background: rgba(15, 18, 27, 0.9);
+  background: rgba(239, 229, 218, 0.9);
   border: 1px solid var(--line);
   z-index: 2;
   transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
@@ -670,7 +683,7 @@ footer {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(6, 8, 12, 0.7);
+  background: rgba(31, 27, 24, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -701,6 +714,9 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--dark-panel);
+  border: 1px solid var(--dark-border);
+  border-radius: 12px;
 }
 
 .modal-body svg {
@@ -737,7 +753,7 @@ footer {
 @media (hover: hover) {
   .card:hover {
     transform: translateY(-2px);
-    border-color: rgba(233, 236, 241, 0.2);
+    border-color: var(--border-strong);
   }
 
   .btn:hover,
@@ -926,5 +942,40 @@ footer {
     padding-right: 16px;
   }
 
- 
+  .story-text,
+  .story-text .story-p,
+  .story-text .eyebrow {
+    color: var(--text);
+    text-shadow: none;
+  }
+
+  .story-text .eyebrow {
+    color: rgba(31, 27, 24, 0.70);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+  }
+
+  .story-text.is-over-media,
+  .story-text.is-over-media .story-p,
+  .story-text.is-over-media .eyebrow {
+    color: var(--surface);
+    text-shadow:
+      0 1px 1px rgba(31, 27, 24, 0.85),
+      0 6px 18px rgba(31, 27, 24, 0.35);
+  }
+
+  .story-text.is-over-media .eyebrow {
+    color: rgba(246, 240, 232, 0.90);
+    text-shadow:
+      0 1px 1px rgba(31, 27, 24, 0.85),
+      0 6px 18px rgba(31, 27, 24, 0.35);
+  }
+
+  .story-media--img .story-img,
+  .story-media--slideshow .slide {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  }
+
+  
 }

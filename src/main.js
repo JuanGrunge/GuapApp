@@ -30,6 +30,7 @@ const tabs = Array.from(document.querySelectorAll(".tab"));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let lenis = null;
 let slideshowTimer = null;
+let storyContrastCleanup = null;
 
 if (!prefersReducedMotion) {
   lenis = new Lenis({
@@ -59,6 +60,64 @@ function stopSlideshow() {
     clearInterval(slideshowTimer);
     slideshowTimer = null;
   }
+}
+
+function rectsIntersect(a, b) {
+  return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
+}
+
+function initStoryContrast() {
+  if (storyContrastCleanup) {
+    storyContrastCleanup();
+    storyContrastCleanup = null;
+  }
+
+  const isDesktop = window.matchMedia("(min-width: 900px)").matches;
+  if (!isDesktop) return;
+
+  const blocks = Array.from(view.querySelectorAll(".story-block"));
+  if (!blocks.length) return;
+
+  let rafId = null;
+
+  const update = () => {
+    rafId = null;
+    for (const block of blocks) {
+      const text = block.querySelector(".story-text");
+      const media = block.querySelector(".story-media");
+      if (!text || !media) continue;
+
+      const tr = text.getBoundingClientRect();
+      const mr = media.getBoundingClientRect();
+      const overlap = rectsIntersect(tr, mr);
+      text.classList.toggle("is-over-media", overlap);
+    }
+  };
+
+  const schedule = () => {
+    if (rafId) return;
+    rafId = requestAnimationFrame(update);
+  };
+
+  schedule();
+
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", schedule);
+
+  storyContrastCleanup = () => {
+    if (rafId) cancelAnimationFrame(rafId);
+    window.removeEventListener("scroll", schedule);
+    window.removeEventListener("resize", schedule);
+    blocks.forEach((block) => block.querySelector(".story-text")?.classList.remove("is-over-media"));
+  };
+}
+
+function clearStoryContrast() {
+  if (storyContrastCleanup) {
+    storyContrastCleanup();
+    storyContrastCleanup = null;
+  }
+  view.querySelectorAll(".story-text.is-over-media").forEach((el) => el.classList.remove("is-over-media"));
 }
 
 function initSlideshow() {
@@ -168,9 +227,11 @@ function renderRoute() {
 
   if (hash === "#/rider") {
     renderRider(view, content);
+    clearStoryContrast();
     stopSlideshow();
   } else {
     renderDossier(view, content);
+    initStoryContrast();
     initSlideshow();
   }
 

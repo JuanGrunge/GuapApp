@@ -90,14 +90,8 @@ a {
 }
 
 .hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(120% 90% at 50% 50%, rgba(0, 0, 0, 0) 55%, var(--overlay-mid) 85%, var(--overlay-strong) 100%),
-    linear-gradient(180deg, var(--overlay-strong) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, var(--overlay-strong) 100%),
-    linear-gradient(90deg, var(--overlay-strong) 0%, rgba(0, 0, 0, 0) 18%, rgba(0, 0, 0, 0) 82%, var(--overlay-strong) 100%);
+  content: none;
+  background: none;
 }
 
 .hero-img {
@@ -261,20 +255,17 @@ a {
 }
 
 .story-media--img::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, var(--overlay-strong) 0%, var(--overlay-mid) 18%, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0) 70%, var(--overlay-mid) 86%, var(--overlay-strong) 100%),
-    linear-gradient(180deg, var(--overlay-mid) 0%, rgba(0, 0, 0, 0) 28%, rgba(0, 0, 0, 0) 72%, var(--overlay-strong) 100%),
-    radial-gradient(120% 90% at 55% 50%, rgba(0, 0, 0, 0) 52%, var(--overlay-mid) 82%, var(--overlay-strong) 100%);
+  content: none;
+  background: none;
 }
 
 .story-media--slideshow {
   position: relative;
 }
+
+.story-media--slideshow::before,
+.story-media--slideshow::after,
+.story-block--carousel-feature .story-media--slideshow::before,
 
 .story-media--slideshow .slide {
   position: absolute;
@@ -363,14 +354,8 @@ a {
 }
 
 .story-block--feature .story-media--img::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 55%, var(--overlay-mid) 78%, var(--overlay-strong) 100%),
-    radial-gradient(120% 90% at 60% 50%, rgba(0, 0, 0, 0) 52%, var(--overlay-soft) 82%, var(--overlay-mid) 100%);
+  content: none;
+  background: none;
 }
 
 .story-block--carousel-feature {
@@ -412,15 +397,9 @@ a {
 }
 
 .story-block--carousel-feature .story-media--slideshow::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, var(--overlay-strong) 0%, var(--overlay-mid) 14%, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0) 100%),
-    linear-gradient(180deg, var(--overlay-soft) 0%, rgba(0, 0, 0, 0) 28%, rgba(0, 0, 0, 0) 72%, var(--overlay-mid) 100%),
-    radial-gradient(120% 90% at 45% 50%, rgba(0, 0, 0, 0) 55%, var(--overlay-fade) 82%, var(--overlay-mid) 100%);
+  content: none !important;
+  background: none !important;
+  opacity: 0 !important;
 }
 
 .slide-caption {
@@ -971,11 +950,42 @@ footer {
       0 6px 18px rgba(31, 27, 24, 0.35);
   }
 
-  .story-media--img .story-img,
-  .story-media--slideshow .slide {
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
-  }
+}
 
-  
+/* MASKS — single source of truth */
+.hero-img {
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.story-media--img .story-img,
+.story-media--slideshow .slide,
+.story-media--slideshow .story-img {
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
+  mask-composite: intersect;
+}
+
+@media (min-width: 900px) {
+  .story-block--feature .story-media--img .story-img {
+    -webkit-mask-image:
+      linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%),
+      linear-gradient(180deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%),
+      linear-gradient(180deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
+    mask-composite: intersect;
+  }
 }

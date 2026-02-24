@@ -94,11 +94,17 @@ a {
   background: none;
 }
 
+.hero::before {
+  content: none;
+}
+
 .hero-img {
   width: 100%;
   height: auto;
   display: block;
   object-fit: contain;
+  position: relative;
+  z-index: 1;
 }
 
 .brand {
@@ -116,29 +122,23 @@ a {
 }
 
 .tabs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: var(--panel2);
+  position: relative;
+  display: flex;
+  gap: 0;
+  background: var(--surface-2);
   border-radius: 999px;
-  padding: 4px;
-  border: 1px solid var(--line);
-  box-shadow: 0 8px 24px var(--shadow);
+  padding: 6px;
+  border: 1px solid var(--border);
+  box-shadow: none;
+  overflow: hidden;
+  align-self: stretch;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
 }
 
 .tab {
-  border: none;
-  background: transparent;
   color: var(--muted);
-  padding: 10px 12px;
-  border-radius: 999px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 220ms ease, background 220ms ease, transform 220ms ease;
-}
-
-.tab.active {
-  background: var(--accent);
-  color: var(--text);
 }
 
 .view {
@@ -526,29 +526,55 @@ a {
 }
 
 .segmented {
+  position: relative;
   display: inline-flex;
   gap: 4px;
-  background: var(--panel2);
+  background: var(--surface-2);
   border-radius: 999px;
   padding: 4px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--border);
+  box-shadow: none;
+  overflow: hidden;
 }
 
-.segmented button {
+.segmented button,
+.tab {
   border: none;
   background: transparent;
   color: var(--muted);
-  padding: 8px 12px;
+  padding: 10px 12px;
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
-  font-size: 12px;
-  transition: color 220ms ease, background 220ms ease, transform 220ms ease;
+  transition: color 220ms ease, transform 220ms ease;
+  position: relative;
+  z-index: 1;
+  text-align: center;
 }
 
-.segmented button.active {
-  background: var(--accent);
+.segmented button.active,
+.tab.active {
   color: var(--text);
+}
+
+.segmented[data-battery] button {
+  font-size: 12px;
+  padding: 8px 12px;
+}
+
+.tabs .tab {
+  flex: 1;
+}
+
+.segmented-indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  background: var(--accent);
+  border-radius: 999px;
+  transition: transform 240ms ease, width 240ms ease;
+  will-change: transform, width;
 }
 
 .table-wrap {
@@ -950,6 +976,34 @@ footer {
       0 6px 18px rgba(31, 27, 24, 0.35);
   }
 
+}
+
+@media (min-width: 900px) and (hover: hover) {
+  .hero {
+    --mx: 50%;
+    --my: 50%;
+    --spotlight-opacity: 0.14;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+      radial-gradient(
+        360px 360px at var(--mx) var(--my),
+        rgba(176, 141, 87, var(--spotlight-opacity)) 0%,
+        rgba(176, 141, 87, 0.0) 60%
+      );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before {
+    content: none !important;
+  }
 }
 
 /* MASKS — single source of truth */

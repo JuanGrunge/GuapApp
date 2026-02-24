@@ -27,10 +27,12 @@ app.innerHTML = `
 const view = document.querySelector("#view");
 const page = document.querySelector(".page");
 const tabs = Array.from(document.querySelectorAll(".tab"));
+const tabsContainer = document.querySelector(".tabs");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let lenis = null;
 let slideshowTimer = null;
 let storyContrastCleanup = null;
+let heroSpotlightCleanup = null;
 
 if (!prefersReducedMotion) {
   lenis = new Lenis({
@@ -118,6 +120,50 @@ function clearStoryContrast() {
     storyContrastCleanup = null;
   }
   view.querySelectorAll(".story-text.is-over-media").forEach((el) => el.classList.remove("is-over-media"));
+}
+
+function initHeroSpotlight() {
+  if (heroSpotlightCleanup) {
+    heroSpotlightCleanup();
+    heroSpotlightCleanup = null;
+  }
+
+  const hero = view.querySelector(".hero");
+  if (!hero) return;
+  if (prefersReducedMotion) return;
+  if (!window.matchMedia("(min-width: 900px)").matches) return;
+  if (!window.matchMedia("(hover: hover)").matches) return;
+
+  const update = (event) => {
+    const rect = hero.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    hero.style.setProperty("--mx", `${x}%`);
+    hero.style.setProperty("--my", `${y}%`);
+  };
+
+  const reset = () => {
+    hero.style.setProperty("--mx", "50%");
+    hero.style.setProperty("--my", "50%");
+  };
+
+  hero.addEventListener("pointermove", update);
+  hero.addEventListener("pointerleave", reset);
+  reset();
+
+  heroSpotlightCleanup = () => {
+    hero.removeEventListener("pointermove", update);
+    hero.removeEventListener("pointerleave", reset);
+    hero.style.removeProperty("--mx");
+    hero.style.removeProperty("--my");
+  };
+}
+
+function clearHeroSpotlight() {
+  if (heroSpotlightCleanup) {
+    heroSpotlightCleanup();
+    heroSpotlightCleanup = null;
+  }
 }
 
 function initSlideshow() {
@@ -217,6 +263,48 @@ function setActiveTab(hash) {
   });
 }
 
+function ensureSegmentedIndicator(container) {
+  if (!container) return null;
+  let indicator = container.querySelector(".segmented-indicator");
+  if (!indicator) {
+    indicator = document.createElement("div");
+    indicator.className = "segmented-indicator";
+    container.appendChild(indicator);
+  }
+  return indicator;
+}
+
+function updateSegmentedIndicator(container) {
+  const indicator = ensureSegmentedIndicator(container);
+  if (!indicator) return;
+  const buttons = Array.from(container.querySelectorAll("button"));
+  const active = buttons.find((btn) => btn.classList.contains("active")) || buttons[0];
+  if (!active) return;
+  const containerRect = container.getBoundingClientRect();
+  const activeRect = active.getBoundingClientRect();
+  const x = activeRect.left - containerRect.left;
+  indicator.style.width = `${activeRect.width}px`;
+  indicator.style.transform = `translateX(${x}px)`;
+  indicator.style.transitionDuration = prefersReducedMotion ? "0ms" : "240ms";
+}
+
+function initSegmentedControls() {
+  const containers = Array.from(document.querySelectorAll(".segmented, .tabs, [data-segmented]"));
+  containers.forEach((container) => {
+    if (container === tabsContainer) container.classList.add("segmented");
+    ensureSegmentedIndicator(container);
+    if (!container.dataset.segmentedInit) {
+      container.dataset.segmentedInit = "true";
+      container.addEventListener("click", (event) => {
+        const btn = event.target.closest("button");
+        if (!btn || !container.contains(btn)) return;
+        requestAnimationFrame(() => updateSegmentedIndicator(container));
+      });
+    }
+    updateSegmentedIndicator(container);
+  });
+}
+
 function renderRoute() {
   const hash = normalizeHash(window.location.hash);
   setActiveTab(hash);
@@ -228,10 +316,12 @@ function renderRoute() {
   if (hash === "#/rider") {
     renderRider(view, content);
     clearStoryContrast();
+    clearHeroSpotlight();
     stopSlideshow();
   } else {
     renderDossier(view, content);
     initStoryContrast();
+    initHeroSpotlight();
     initSlideshow();
   }
 
@@ -242,6 +332,8 @@ function renderRoute() {
       revealObserver.observe(el);
     });
   }
+
+  initSegmentedControls();
 }
 
 tabs.forEach((btn) => {
@@ -280,4 +372,8 @@ view.addEventListener("load", (event) => {
 }, true);
 
 window.addEventListener("hashchange", renderRoute);
+window.addEventListener("resize", () => {
+  const containers = Array.from(document.querySelectorAll(".segmented, .tabs, [data-segmented]"));
+  containers.forEach((container) => updateSegmentedIndicator(container));
+});
 renderRoute();

@@ -14,11 +14,6 @@ export const content = {
     ],
     platforms: [
       {
-        id: "whatsapp",
-        label: "WhatsApp",
-        url: "http://wa.me/56948479930",
-      },
-      {
         id: "instagram",
         label: "Instagram",
         url: "https://www.instagram.com/guapatributochile",
@@ -34,36 +29,29 @@ export const content = {
         url: "mailto:guapatributochile@gmail.com",
       },
     ],
-    contact: {
-      general: [
-        {
-          label: "Producción / Booking",
-          value: "Samuel: +56 9 8511 7520",
-          url: "http://wa.me/56985117520",
-        },
-        {
-          label: "Producción / Booking",
-          value: "Marcela: +56 9 4847 9930",
-          url: "http://wa.me/56948479930",
-        },
-        {
-          label: "Correo",
-          value: "guapatributochile@gmail.com",
-          url: "mailto:guapatributochile@gmail.com",
-        },
-      ],
-      technical: [
-        {
-          label: "Responsable",
-          value: "Samuel Cornejo (Guitarrista y técnico de monitoreo)",
-        },
-        {
-          label: "Contacto",
-          value: "sa.cornejo@hotmail.com / +56 9 8511 7520",
-          url: "mailto:sa.cornejo@hotmail.com",
-        },
-      ],
-    },
+    contact: [
+      {
+        label: "Correo",
+        value: "guapatributochile@gmail.com",
+        url: "mailto:guapatributochile@gmail.com",
+      },
+      {
+        label: "Booking",
+        name: "Marcela Ramírez",
+        links: [
+          { label: "WhatsApp", url: "http://wa.me/56948479930" },
+          { label: "marce_ramirez15@hotmail.com", url: "mailto:marce_ramirez15@hotmail.com" },
+        ],
+      },
+      {
+        label: "Producción",
+        name: "Sebastian Cornejo",
+        links: [
+          { label: "WhatsApp", url: "http://wa.me/56985117520" },
+          { label: "sa.cornejo@hotmail.com", url: "mailto:sa.cornejo@hotmail.com" },
+        ],
+      },
+    ],
   },
   rider: {
     summary: [

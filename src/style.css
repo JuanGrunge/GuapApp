@@ -491,6 +491,20 @@ a {
   background: transparent;
 }
 
+.btn-icon {
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn-icon svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+  flex-shrink: 0;
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -516,6 +530,28 @@ a {
 
 .value {
   font-size: 14px;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin-top: 2px;
+}
+
+.contact-link {
+  font-size: 14px;
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.contact-sep {
+  color: var(--muted);
+  font-size: 12px;
+  user-select: none;
 }
 
 .section-row {
@@ -767,6 +803,11 @@ footer {
   .stage-plot-open:hover,
   .modal-close:hover {
     transform: translateY(-1px);
+  }
+
+  .btn-icon:hover {
+    color: var(--accent);
+    border-color: var(--accent);
   }
 }
 

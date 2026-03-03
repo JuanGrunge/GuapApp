@@ -1,11 +1,11 @@
-import heroGuapa from "../assets/hero-guapa.png";
-import guapa01 from "../assets/dossier/guapa-01.jpg";
-import guapa02Gif from "../assets/dossier/guapa-02.gif";
-import imgJuan from "../assets/dossier/guapa-03-juan.jpg";
-import imgNano from "../assets/dossier/guapa-03-nano.jpg";
-import imgMarce from "../assets/dossier/guapa-03-marce.jpg";
-import imgSamuel from "../assets/dossier/guapa-03-samuel.jpg";
-import imgNacho from "../assets/dossier/guapa-03-nacho.jpg";
+import heroGuapa from "../assets/hero-guapa.webp";
+import guapa01 from "../assets/dossier/guapa-01.webp";
+import guapa02Webm from "../assets/dossier/guapa-02.webm";
+import imgJuan from "../assets/dossier/guapa-03-juan.webp";
+import imgNano from "../assets/dossier/guapa-03-nano.webp";
+import imgMarce from "../assets/dossier/guapa-03-marce.webp";
+import imgSamuel from "../assets/dossier/guapa-03-samuel.webp";
+import imgNacho from "../assets/dossier/guapa-03-nacho.webp";
 
 function renderParagraphs(paragraphs) {
   return paragraphs.map((p) => `<p>${p}</p>`).join("");
@@ -66,13 +66,13 @@ export function renderDossier(container, content) {
           <p class="story-p">${content.dossier.description[1]}</p>
         </div>
         <div class="story-media story-media--img" aria-label="Imagen 2">
-          <img
+          <video
             class="story-img"
-            src="${guapa02Gif}"
-            alt="GUAPA — Clip 02"
-            loading="lazy"
-            decoding="async"
-          />
+            autoplay loop muted playsinline
+            aria-label="GUAPA — Clip 02"
+          >
+            <source src="${guapa02Webm}" type="video/webm" />
+          </video>
         </div>
       </article>
 

@@ -1,4 +1,4 @@
-import stageplotImg from "../assets/stageplot-guapa.png";
+import stageplotImg from "../assets/stageplot-guapa.webp";
 
 function renderList(items) {
   return items.map((item) => `<li>${item}</li>`).join("");

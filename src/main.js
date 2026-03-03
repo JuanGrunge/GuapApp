@@ -3,7 +3,7 @@ import { content } from "./content/content";
 import { renderDossier } from "./views/renderDossier";
 import { renderRider } from "./views/renderRider";
 import Lenis from "lenis";
-import logoGuapa from "./assets/logo-guapa.png";
+import logoGuapa from "./assets/logo-guapa.webp";
 
 const app = document.querySelector("#app");
 

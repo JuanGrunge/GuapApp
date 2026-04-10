@@ -305,6 +305,17 @@ function initSegmentedControls() {
   });
 }
 
+function loadInstagramEmbed() {
+  if (window.instgrm) {
+    window.instgrm.Embeds.process();
+  } else {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "//www.instagram.com/embed.js";
+    document.body.appendChild(script);
+  }
+}
+
 function renderRoute() {
   const hash = normalizeHash(window.location.hash);
   setActiveTab(hash);
@@ -320,6 +331,7 @@ function renderRoute() {
     stopSlideshow();
   } else {
     renderDossier(view, content);
+    loadInstagramEmbed();
     initStoryContrast();
     initHeroSpotlight();
     initSlideshow();

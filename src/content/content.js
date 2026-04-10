@@ -29,6 +29,11 @@ export const content = {
         url: "mailto:guapatributochile@gmail.com",
       },
     ],
+    reels: [
+      "https://www.instagram.com/reel/DQnN79hjXdo/",
+      "https://www.instagram.com/reel/DQIQq4JDDyq/",
+      "https://www.instagram.com/reel/DMV47KvSSjl/",
+    ],
     contact: [
       {
         label: "Correo",

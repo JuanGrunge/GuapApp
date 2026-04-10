@@ -505,6 +505,39 @@ a {
   flex-shrink: 0;
 }
 
+/* ── Instagram Reels grid ─────────────────────────────── */
+.reels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.reel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.reels-grid .instagram-media {
+  width: 100% !important;
+  min-width: unset !important;
+  margin: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+/* Iframes no capturan wheel events mientras el usuario no está sobre el card,
+   así Lenis recibe el scroll normalmente al pasar por la región. */
+.reels-grid iframe {
+  pointer-events: none;
+}
+
+.reel-item:hover iframe {
+  pointer-events: auto;
+}
+
 .list {
   display: flex;
   flex-direction: column;

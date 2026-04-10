@@ -36,6 +36,22 @@ function renderPlatformButtons(platforms) {
     .join("");
 }
 
+function renderReels(reels) {
+  return reels
+    .map(
+      (url) => `
+        <div class="reel-item">
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="${url}?utm_source=ig_embed&utm_campaign=loading"
+            data-instgrm-version="14">
+            <a href="${url}" target="_blank" rel="noopener">Ver en Instagram</a>
+          </blockquote>
+        </div>`
+    )
+    .join("");
+}
+
 function renderContactItems(items) {
   return items
     .map((item) => {
@@ -121,6 +137,9 @@ export function renderDossier(container, content) {
       <h2>Plataformas</h2>
       <div class="buttons">
         ${renderPlatformButtons(content.dossier.platforms)}
+      </div>
+      <div class="reels-grid">
+        ${renderReels(content.dossier.reels)}
       </div>
     </section>
 

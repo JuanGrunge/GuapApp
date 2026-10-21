@@ -279,127 +279,48 @@ a {
   opacity: 1;
 }
 
-.story-block--hero {
-  position: relative;
-  align-items: stretch;
-  min-height: 320px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+/* BLOQUES DEL DOSSIER — texto y foto en columnas separadas, en zigzag
+   01: texto | foto  ·  02: foto | texto  ·  03: texto | slideshow
+   (<= 820px: apilados, ver la media query de más abajo) */
+@media (min-width: 821px) {
+  .story-block--hero,
+  .story-block--carousel-feature {
+    grid-template-columns: 42fr 58fr;
+  }
+
+  .story-block--feature {
+    grid-template-columns: 58fr 42fr;
+  }
+
+  .story-block--hero,
+  .story-block--feature,
+  .story-block--carousel-feature {
+    gap: 56px;
+    align-items: center;
+  }
+
+  .story-block--hero .story-media--img,
+  .story-block--feature .story-media--img,
+  .story-block--carousel-feature .story-media--slideshow {
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+  }
 }
 
-.story-block--hero .story-text {
-  position: relative;
-  z-index: 3;
-  max-width: 58ch;
-  align-self: center;
-  padding: 26px 18px 26px 26px;
-}
+/* Pantallas medianas: la columna de texto es angosta, se compacta un poco */
+@media (min-width: 821px) and (max-width: 1099px) {
+  .story-block--hero,
+  .story-block--feature,
+  .story-block--carousel-feature {
+    gap: 36px;
+  }
 
-.story-block--hero .story-media--img {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 70%;
-  height: 100%;
-  z-index: 1;
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-.story-block--hero .story-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.story-block--feature {
-  position: relative;
-  min-height: 420px;
-}
-
-.story-block--feature .story-media--img {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 78%;
-  height: 100%;
-  z-index: 1;
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-.story-block--feature .story-media--img .story-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  z-index: 1;
-}
-
-.story-block--feature .story-text {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  width: min(560px, 42vw);
-  z-index: 3;
-  padding: 28px 32px;
-  text-shadow: none;
-}
-
-.story-block--feature .story-text::before {
-  content: none;
-}
-
-.story-block--feature .story-media--img::after {
-  content: none;
-  background: none;
-}
-
-.story-block--carousel-feature {
-  position: relative;
-  min-height: 420px;
-}
-
-.story-block--carousel-feature .story-media--slideshow {
-  position: absolute;
-  inset: 0 0 0 auto;
-  width: 70%;
-  height: 100%;
-  z-index: 1;
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-.story-block--carousel-feature .story-media--slideshow .slide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.story-block--carousel-feature .story-text {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  width: min(520px, 40vw);
-  z-index: 3;
-  padding: 28px 28px;
-  text-shadow: none;
-}
-
-.story-block--carousel-feature .story-text::before {
-  content: none;
-}
-
-.story-block--carousel-feature .story-media--slideshow::after {
-  content: none !important;
-  background: none !important;
-  opacity: 0 !important;
+  .story-block--hero .story-p,
+  .story-block--feature .story-p,
+  .story-block--carousel-feature .story-p {
+    font-size: 18px;
+  }
 }
 
 .slide-caption {
@@ -1003,24 +924,6 @@ footer {
     padding: 32px 24px 60px;
   }
 
-  .view--dossier .story-block {
-    grid-template-columns: 1fr 1fr;
-    gap: 44px;
-    min-height: 70vh;
-    align-content: center;
-  }
-
-  .view--dossier .story-block--hero .story-media--img {
-    width: 76%;
-    right: 0;
-  }
-
-  .view--dossier .story-block--hero .story-text {
-    max-width: 60ch;
-    padding-left: 32px;
-    padding-right: 16px;
-  }
-
   .story-text,
   .story-text .story-p,
   .story-text .eyebrow {
@@ -1076,88 +979,16 @@ footer {
   mask-composite: intersect;
 }
 
+/* Difuminado de las fotos del dossier: corto (5% por lado), solo para suavizar el borde */
 .story-media--img .story-img,
 .story-media--slideshow .slide,
 .story-media--slideshow .story-img {
   -webkit-mask-image:
-    linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%),
     linear-gradient(180deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
   -webkit-mask-composite: source-in;
   mask-image:
-    linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%),
     linear-gradient(180deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
   mask-composite: intersect;
-}
-
-@media (min-width: 900px) {
-  .story-block--feature .story-media--img .story-img {
-    -webkit-mask-image:
-      linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%),
-      linear-gradient(180deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%),
-      linear-gradient(180deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
-    mask-composite: intersect;
-  }
-}
-
-/* DOSSIER — texto sobre fotos
-   El texto va en un panel beige (casi opaco, con desenfoque) y siempre oscuro,
-   así la superposición con la foto no depende de qué hay detrás.
-   En mobile (<= 820px) no aplica: el texto va debajo de la foto. */
-@media (min-width: 821px) {
-  .view--dossier .story-block--hero .story-text,
-  .view--dossier .story-block--feature .story-text,
-  .view--dossier .story-block--carousel-feature .story-text {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    transform: none;
-    z-index: 3;
-    padding: 30px 34px;
-    border-radius: 18px;
-    background: rgba(217, 208, 198, 0.92); /* = --bg al 92% */
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    box-shadow:
-      0 0 0 1px rgba(31, 27, 24, 0.06),
-      0 18px 44px rgba(31, 27, 24, 0.16);
-  }
-
-  .view--dossier .story-block--hero .story-text {
-    grid-column: 1;
-    justify-self: start;
-  }
-
-  .view--dossier .story-block--feature .story-text {
-    grid-column: 2;
-    justify-self: end;
-    width: min(560px, 100%);
-  }
-
-  .view--dossier .story-block--carousel-feature .story-text {
-    grid-column: 1;
-    justify-self: start;
-    width: min(520px, 100%);
-  }
-
-  .view--dossier .story-text .story-p {
-    color: var(--text);
-    text-shadow: none;
-  }
-
-  .view--dossier .story-text .eyebrow {
-    color: rgba(31, 27, 24, 0.82);
-    text-shadow: none;
-  }
-
-  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .view--dossier .story-block--hero .story-text,
-    .view--dossier .story-block--feature .story-text,
-    .view--dossier .story-block--carousel-feature .story-text {
-      background: rgba(217, 208, 198, 0.97);
-    }
-  }
 }

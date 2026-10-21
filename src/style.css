@@ -1034,22 +1034,6 @@ footer {
     letter-spacing: 0.14em;
   }
 
-  .story-text.is-over-media,
-  .story-text.is-over-media .story-p,
-  .story-text.is-over-media .eyebrow {
-    color: var(--surface);
-    text-shadow:
-      0 1px 1px rgba(31, 27, 24, 0.85),
-      0 6px 18px rgba(31, 27, 24, 0.35);
-  }
-
-  .story-text.is-over-media .eyebrow {
-    color: rgba(246, 240, 232, 0.90);
-    text-shadow:
-      0 1px 1px rgba(31, 27, 24, 0.85),
-      0 6px 18px rgba(31, 27, 24, 0.35);
-  }
-
 }
 
 @media (min-width: 900px) and (hover: hover) {
@@ -1115,5 +1099,65 @@ footer {
       linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%),
       linear-gradient(180deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
     mask-composite: intersect;
+  }
+}
+
+/* DOSSIER — texto sobre fotos
+   El texto va en un panel beige (casi opaco, con desenfoque) y siempre oscuro,
+   así la superposición con la foto no depende de qué hay detrás.
+   En mobile (<= 820px) no aplica: el texto va debajo de la foto. */
+@media (min-width: 821px) {
+  .view--dossier .story-block--hero .story-text,
+  .view--dossier .story-block--feature .story-text,
+  .view--dossier .story-block--carousel-feature .story-text {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    z-index: 3;
+    padding: 30px 34px;
+    border-radius: 18px;
+    background: rgba(217, 208, 198, 0.92); /* = --bg al 92% */
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow:
+      0 0 0 1px rgba(31, 27, 24, 0.06),
+      0 18px 44px rgba(31, 27, 24, 0.16);
+  }
+
+  .view--dossier .story-block--hero .story-text {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .view--dossier .story-block--feature .story-text {
+    grid-column: 2;
+    justify-self: end;
+    width: min(560px, 100%);
+  }
+
+  .view--dossier .story-block--carousel-feature .story-text {
+    grid-column: 1;
+    justify-self: start;
+    width: min(520px, 100%);
+  }
+
+  .view--dossier .story-text .story-p {
+    color: var(--text);
+    text-shadow: none;
+  }
+
+  .view--dossier .story-text .eyebrow {
+    color: rgba(31, 27, 24, 0.82);
+    text-shadow: none;
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .view--dossier .story-block--hero .story-text,
+    .view--dossier .story-block--feature .story-text,
+    .view--dossier .story-block--carousel-feature .story-text {
+      background: rgba(217, 208, 198, 0.97);
+    }
   }
 }

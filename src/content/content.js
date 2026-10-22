@@ -29,10 +29,15 @@ export const content = {
         url: "mailto:guapatributochile@gmail.com",
       },
     ],
+    // Orden: del más reciente al más antiguo (la grilla respeta este orden)
     reels: [
-      "https://www.instagram.com/reel/DQnN79hjXdo/",
-      "https://www.instagram.com/reel/DQIQq4JDDyq/",
-      "https://www.instagram.com/reel/DMV47KvSSjl/",
+      "https://www.instagram.com/reel/Des77RZOCRy/", // 20 oct 2026
+      "https://www.instagram.com/reel/Dc2ciorPkGV/", // 4 sep 2026
+      "https://www.instagram.com/reel/DcfBW1dN4TW/", // 25 ago 2026
+      "https://www.instagram.com/reel/Dce_vNitmov/", // 25 ago 2026
+      "https://www.instagram.com/reel/DQnN79hjXdo/", // 3 nov 2025
+      "https://www.instagram.com/reel/DQIQq4JDDyq/", // 22 oct 2025
+      "https://www.instagram.com/reel/DMV47KvSSjl/", // 20 jul 2025
     ],
     contact: [
       {

@@ -55,7 +55,7 @@ export const content = {
       },
       {
         label: "Producción",
-        name: "Sebastian Cornejo",
+        name: "Samuel Cornejo",
         links: [
           { label: "WhatsApp", url: "http://wa.me/56985117520" },
           { label: "sa.cornejo@hotmail.com", url: "mailto:sa.cornejo@hotmail.com" },

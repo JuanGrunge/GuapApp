@@ -330,10 +330,17 @@ a {
   z-index: 6;
   font-family: var(--font-display);
   letter-spacing: 0.06em;
-  font-size: 22px;
-  color: rgba(246, 240, 232, 0.95);
+  font-size: 26px;
+  line-height: 1.1;
+  color: rgba(246, 240, 232, 0.98);
   text-transform: uppercase;
-  text-shadow: 0 10px 26px var(--overlay-strong);
+  /* bloque de vidrio: oscuro y semitransparente para que el nombre se lea sobre cualquier foto */
+  padding: 5px 14px 3px;
+  border-radius: 10px;
+  background: rgba(31, 27, 24, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 450ms ease, transform 450ms ease;
@@ -883,7 +890,8 @@ footer {
   }
 
   .slide-caption {
-    font-size: 18px;
+    font-size: 21px;
+    padding: 4px 11px 2px;
     right: 12px;
     bottom: 10px;
   }
